@@ -17,27 +17,29 @@
 @endsection
 
 @section('post')
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-        <div class="post-section card">
-            <div class="row">
-                <div class="col-md-3 post_image">
-                    <img src="{{ asset('assets/image/avatar.jpg')}}" alt="">
-                </div>
-                <div class="col-md-9">
-                    <p>
-                        <strong>Md.Rabiul Hasan</strong>
-                        7:58 pm 7th July, 2020
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat quas eos sapiente asperiores dicta similique rem neque aliquam quaerat, quasi exercitationem maiores modi tempore, placeat fugiat eligendi veritatis itaque cumque.m
-                    </p>
+    @foreach ($posts as $post)
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="post-section card">
+                    <div class="row">
+                        <div class="col-md-3 post_image">
+                            <img src="{{ asset('assets/image/avatar.jpg')}}" alt="">
+                        </div>
+                        <div class="col-md-9">
+                            <p>
+                                <strong>{{ $post->user->name }}</strong>
+                                {{ date('h:m a jS F, Y', strtotime($post->created_at)) }}
+                            </p>
+                            <p>
+                                {{ $post->status }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="spacer"></div>
+        <div class="spacer"></div>
+    @endforeach
 @endsection
 
 

@@ -29,7 +29,9 @@ class HomeController extends Controller
     }
 
     public function shout(){
-        return view('shout');
+        $user_id = Auth::user()->id;
+        $posts = Status::where('user_id',$user_id)->orderBy('created_at', 'desc')->get();
+        return view('shout',["posts"=>$posts]);
     }
 
     public function savePost(Request $request){
