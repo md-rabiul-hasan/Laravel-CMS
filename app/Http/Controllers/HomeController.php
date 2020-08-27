@@ -29,11 +29,7 @@ class HomeController extends Controller {
 
     public function shout() {
         $posts = Auth::user()->friendshipStatus;
-        return $posts;
-        $user_id = Auth::user()->id;
-        $posts   = Status::where('user_id', $user_id)->orderBy('created_at', 'desc')->get();
-        $avatar  = empty(Auth::user()->avatar) ? "images/avatar.jpg" : Auth::user()->avatar;
-        return view('shout', ["posts" => $posts, "avatar" => $avatar]);
+        return view('shout', ["posts" => $posts]);
     }
 
     public function savePost(Request $request) {

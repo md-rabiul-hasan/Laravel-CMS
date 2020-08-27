@@ -23,7 +23,7 @@
                 <div class="post-section card">
                     <div class="row">
                         <div class="col-md-3 post_image">
-                            <img src="{{ asset($avatar)}}" alt="">
+                            <img src="{{ asset(empty($post->user->avatar) ? 'images/avatar.jpg' : $post->user->avatar) }}" alt="">
                         </div>
                         <div class="col-md-9">
                             <p>
