@@ -16,14 +16,14 @@
 </div>
 @endsection
 
-@section('post')
+@section('content')
     @foreach ($posts as $post)
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="post-section card">
                     <div class="row">
                         <div class="col-md-3 post_image">
-                            <img src="{{ asset('assets/image/avatar.jpg')}}" alt="">
+                            <img src="{{ asset($avatar)}}" alt="">
                         </div>
                         <div class="col-md-9">
                             <p>

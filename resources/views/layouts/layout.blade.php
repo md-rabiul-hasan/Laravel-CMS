@@ -9,13 +9,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
-    @stack('css');
+    @stack('css')
 
     <title>Twitter!</title>
   </head>
   <body>
     <section id="header">
-        <p>HOME</p>
+        <p>{{ $public_user_name ?? 'HOME' }}</p>
+        @yield('action')
     </section>
     <div class="spacer"></div>
     <div class="containe">
@@ -25,7 +26,7 @@
 
         <!-- Post Content Section Start -->
         <div class="spacer"></div>
-        @yield('post')
+        @yield('content')
         <!-- Post Contant Section Start -->
         
         

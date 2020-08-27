@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,4 +21,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/shout', 'HomeController@shout')->name('shout');
-Route::post('/shout/save-post','HomeController@savePost')->name('shout.save');
+Route::post('/shout/save-post', 'HomeController@savePost')->name('shout.save');
+Route::get('/shout/{nickname}', 'HomeController@publiTimeline')->name('shout.publictimeline');
+
+Route::get('/profile', 'ProfileController@profile')->name('profile');
+Route::post('/profile/update', 'ProfileController@profileUpdate')->name('profile.update');\
+
+Route::get('/shout/public/make-friend/{friendId}', 'HomeController@makeFriend')->name('shout.public.friend');
+Route::get('/shout/public/make-unfriend/{friendId}', 'HomeController@makeUnfriend')->name('shout.public.unfriend');
