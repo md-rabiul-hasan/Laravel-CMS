@@ -2,12 +2,12 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Friend;
+use App\Status;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use Notifiable;
 
     /**
@@ -36,4 +36,32 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function friend() {
+        return $this->hasMany(Friend::class);
+    }
+
+    public function status() {
+        return $this->hasMany(Status::class);
+    }
+
+    public function friendshipStatus() {
+        return $this->hasManyThrough(Status::class, Friend::class, 'friend_id', 'user_id', 'id', 'user_id');
+    }
+
+    // has many throug work process
+    /*
+    SELECT status.* FROM statuses 
+    INNER JOIN friends on status.user_id=frieds.friend_id
+    where friends.user_id=1
+
+    return $this->hasManyThrough(
+        Status::class,  // First Table
+        Friend::class,  // Second Table
+        'friend_id',  // second table join key
+        'user_id',  // frist table join key
+        'id', // first table primary key
+         'user_id'); // lockup column
+
+    */
 }

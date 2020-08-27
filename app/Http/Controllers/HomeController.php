@@ -28,6 +28,8 @@ class HomeController extends Controller {
     }
 
     public function shout() {
+        $posts = Auth::user()->friendshipStatus;
+        return $posts;
         $user_id = Auth::user()->id;
         $posts   = Status::where('user_id', $user_id)->orderBy('created_at', 'desc')->get();
         $avatar  = empty(Auth::user()->avatar) ? "images/avatar.jpg" : Auth::user()->avatar;
@@ -90,7 +92,12 @@ class HomeController extends Controller {
             $friend->friend_id = $current_user_id;
             $friend->save();
         }
-
+        if (Friend::where('friend_id', $current_user_id)->where('user_id', $current_user_id)->count() == 0) {
+            $friend            = new Friend();
+            $friend->user_id   = $current_user_id;
+            $friend->friend_id = $current_user_id;
+            $friend->save();
+        }
         return redirect()->route('shout');
     }
 
